@@ -1,13 +1,10 @@
 package app.lector.tortilleria_salida;
 
-import android.content.Intent;
-import android.net.Uri;
+
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -35,23 +32,16 @@ public class MainActivity extends AppCompatActivity implements IPasarDatos {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_productoshow)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setDrawerLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController
-                (this, R.id.nav_host_fragment_content_main);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
@@ -67,26 +57,41 @@ public class MainActivity extends AppCompatActivity implements IPasarDatos {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController
-                (this, R.id.nav_host_fragment_content_main);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
 
 
     @Override
-    public void irFacebook(String urlFacebook) {permiso.irRedSocial( urlFacebook );}
+    public void irFacebook(String urlFacebook) {
 
-    @Override
-    public void irTwitter(String urlTwitter) {permiso.irRedSocial( urlTwitter );}
-
-    @Override
-    public void irGoogle(String urlGoogle) {
-
-        Toast.makeText(this, "Bienvenido, este opcion no reliza ninguna acción", Toast.LENGTH_LONG).show();
+        permiso.irRedSocial( urlFacebook );
+//        Uri uri = Uri.parse( urlFacebook );
+//        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+//            startActivity(intent);
+//        }
 
 
     }
+
     @Override
-    public void hacerLlamada(String numeroCel ) { permiso.permisoAppLlamar(numeroCel); }
+    public void irTwitter(String urlTwitter)
+    {
+        permiso.irRedSocial( urlTwitter );
+
+    }
+
+    @Override
+    public void irGoogle(String urlGoogle) {
+        Toast.makeText(this, "Bienvenido,  esta opción no realiza ningua acción", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void hacerLlamada(String numeroCel )
+    {
+        permiso.permisoAppLlamar(numeroCel);
+
+    }
 }
