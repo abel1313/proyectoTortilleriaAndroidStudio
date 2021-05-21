@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorButton">#95CCFC</color>
+    <color name="colorButtonAcceso">#86888F</color>
+
+    <color name="colorDrawable">#39B1BF</color>
+
+</resources>

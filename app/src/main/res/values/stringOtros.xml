@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nameTextCard">Tortillería la salida</string>
+    <string name="exitenciasCard">Disponibilidad</string>
+    <string name="nombreProductoCard">Nombre producto</string>
+    <string name="precioProducto">Precio producto</string>
+    <string name="editTextPedido">Ingrese la cantidad</string>
+    <string name="kg">kg</string>
+    <string name="pesos">$pesos</string>
+    <string name="textLogin">Acceso al sistema</string>
+    <string name="textBienvenido">Bienvenido</string>
+    <string name="textUsuarioLogin">Usuario</string>
+    <string name="textContraLogin">Contraseña</string>
+    <string name="btnAccesoText">Acceso</string>
+    <string name="textSinCuenta">Si no cuenta con un usuario seleccione este botón</string>
+    <string name="textDescripccion">Tortillería la salida ubicada en salida a Hermiltepec,
+        colonia Emiliano Zapata entre calle Moctezuma y calle Tezozomoc. </string>
+    <string name="btnInvitado">Invitado</string>
+    <string name="descripccionServiceEjemplo">Solo estamos realizando un ejemplo para este servide de ejemplo</string>
+
+    <string name="nameButton">codigo qr</string>
+    <string name="nameButtonScanner">scanner</string>
+    <string name="nameButtonTortilleria">tortilleria</string>
+
+    <string name="descripcionProducto">Rica tortilla hecha a mano</string>
+    <string name="introduccionSistema">Esta aplicación solamente permite
+        dar a conocer al público en general de Luvianos Estado de México
+        las existencias de tortillas.</string>
+
+    <string name="textContacto">Contacto</string>
+
+</resources>
