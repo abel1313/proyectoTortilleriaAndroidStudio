@@ -1,6 +1,7 @@
-package app.lector.tortilleria_salida.webService.pedidos;
+package app.lector.tortilleria_salida.webService.Producto;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -14,14 +15,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.time.LocalTime;
 import app.lector.tortilleria_salida.R;
 import app.lector.tortilleria_salida.model.ConfigRequeen;
-import app.lector.tortilleria_salida.model.Producto;
 import app.lector.tortilleria_salida.patronDiseno.MySingleton;
 
-
-public class PedidoWebService
+public class ProductoWebService
 {
     private Context context;
     private View view;
@@ -29,12 +27,12 @@ public class PedidoWebService
     private TextView txtExistenciasCalor, txtNombreProductoCard, txtPrecioProductoCard;
     private LinearLayout linearLayoutEjemplo;
 
-    public PedidoWebService( final Context context, View view)
+    public ProductoWebService(final Context context, View view)
     {
         this.context = context;
         this.view = view;
     }
-    public PedidoWebService( )
+    public ProductoWebService( )
     {
     }
     public void getProducto()
@@ -55,7 +53,7 @@ public class PedidoWebService
                 (Request.Method.GET, url, null, response -> {
                     try {
 
-                        datosPedido( response );
+                        datosProducto( response );
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -64,7 +62,9 @@ public class PedidoWebService
                 }, error -> {
                     errorData( error);
                     Toast.makeText( context ,error+" error", Toast.LENGTH_SHORT).show();
-
+                    Log.d("Errorr", "------------------------------------------------------");
+                    Log.d("Errorr", error.getMessage() + " " + url );
+                    Log.d("Errorr", "------------------------------------------------------");
                 });
 
         // Access the RequestQueue through your singleton class.
@@ -72,20 +72,21 @@ public class PedidoWebService
 
     }
 
-    public void errorData( VolleyError error)
+    private void errorData( VolleyError error)
     {
         edtPedido = (view.findViewById(R.id.edtPedido));
 
         edtPedido.setText(error.getMessage() + "");
     }
-    public void datosPedido( JSONObject jSONObject ) throws JSONException {
+
+    private void datosProducto( JSONObject jSONObject ) throws JSONException {
         if( jSONObject != null )
         {
-                Producto p = new Producto();
-                p.setId( jSONObject.getInt("id"));
-                p.setNombreProducto( jSONObject.getString("nombreProducto"));
-                p.setPrecioProducto( jSONObject.getDouble("precioProducto"));
-                p.setDisponibilidadProducto( jSONObject.getDouble("disponibilidadProducto"));
+            app.lector.tortilleria_salida.model.Producto p = new app.lector.tortilleria_salida.model.Producto();
+            p.setId( jSONObject.getInt("id"));
+            p.setNombreProducto( jSONObject.getString("nombreProducto"));
+            p.setPrecioProducto( jSONObject.getDouble("precioProducto"));
+            p.setDisponibilidadProducto( jSONObject.getDouble("disponibilidadProducto"));
 
             txtExistenciasCalor.setText( p.getDisponibilidadProducto() +" kg");
             txtNombreProductoCard.setText( p.getNombreProducto());
@@ -100,12 +101,11 @@ public class PedidoWebService
         }
 
         // para ocultar un Layout
-      //  linearLayoutEjemplo.setVisibility(LinearLayout.GONE);
+        //  linearLayoutEjemplo.setVisibility(LinearLayout.GONE);
         // es para mostrar un Layout
-            linearLayoutEjemplo.setVisibility(LinearLayout.VISIBLE);
+        linearLayoutEjemplo.setVisibility(LinearLayout.VISIBLE);
 
     }
-
 
 
 }

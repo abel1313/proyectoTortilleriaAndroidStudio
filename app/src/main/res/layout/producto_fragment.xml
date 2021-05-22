@@ -113,9 +113,7 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:text="@string/exitenciasCard"
-                android:textSize="12dp"
-
-                />
+                android:textSize="12dp" />
 
             <TextView
                 android:id="@+id/existenciasValor"
@@ -128,11 +126,25 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="86dp">
+
+            <Button
+                android:id="@+id/btnUpdateProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/styleButton"
+                android:text="update"/>
+
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="90sp"
+            android:layout_marginTop="110sp"
             android:background="@drawable/tortillas_sm13">
 
         </LinearLayout>
@@ -227,8 +239,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
-            android:layout_width="271dp"
-            android:layout_height="wrap_content"
+            android:layout_width="291dp"
+            android:layout_height="291dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
