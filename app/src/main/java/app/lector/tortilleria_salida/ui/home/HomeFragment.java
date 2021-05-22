@@ -74,15 +74,15 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-      //  final TextView textViewEjemplo = binding.textEjemplo;
-
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        final TextView textView = binding.textHome;
+//      //  final TextView textViewEjemplo = binding.textEjemplo;
+//
+//        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
         //homeViewModel.getTextEjemplo().observe(getViewLifecycleOwner(),s -> textViewEjemplo.setText(s));
         return root;
     }
