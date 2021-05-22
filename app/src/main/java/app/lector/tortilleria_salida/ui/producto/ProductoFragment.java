@@ -22,9 +22,10 @@ import android.widget.Toast;
 import app.lector.tortilleria_salida.R;
 import org.jetbrains.annotations.NotNull;
 
+
 import app.lector.tortilleria_salida.databinding.ProductoFragmentBinding;
 import app.lector.tortilleria_salida.localHorario.HorarioLocal;
-import app.lector.tortilleria_salida.model.Producto;
+
 import app.lector.tortilleria_salida.model.Usuario;
 import app.lector.tortilleria_salida.webService.Producto.ProductoWebService;
 

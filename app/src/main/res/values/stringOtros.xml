@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="nameTextCard">Tortillería la salida</string>
+    <string name="nameTextCard">"Tortillería la salida"</string>
     <string name="exitenciasCard">Disponibilidad</string>
     <string name="nombreProductoCard">Nombre producto</string>
     <string name="precioProducto">Precio producto</string>
