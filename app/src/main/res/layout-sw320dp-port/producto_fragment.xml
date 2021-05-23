@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.producto.ProductoFragment"
-    android:background="@color/colorBackroundActivity">
+    android:background="@color/colorBackroundActivity"
+    >
 
     <TextView
         android:id="@+id/text_producto"

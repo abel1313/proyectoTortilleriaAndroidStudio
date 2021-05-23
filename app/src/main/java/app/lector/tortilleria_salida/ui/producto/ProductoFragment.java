@@ -11,13 +11,17 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import app.lector.tortilleria_salida.R;
 import org.jetbrains.annotations.NotNull;
@@ -41,8 +45,11 @@ public class ProductoFragment extends Fragment {
     private TextView txtDisponibilidadProducto;
     private TextView txtNombreProducto;
     private TextView txtPrecioProducto;
-    private Button btnUpdateProducto;
+    private Button btnUpdateProducto, btnAccederSistema;
     TextView t;
+    private EditText edtUsuario, edtContra;
+
+    private Snackbar mySnackbar;
 
     private ProductoWebService obtenerProductos;
     public static ProductoFragment newInstance() {
@@ -61,9 +68,12 @@ public class ProductoFragment extends Fragment {
 
         txtDisponibilidadProducto = bindingProducto.txtDisponibilidad;
         txtNombreProducto = bindingProducto.txtNombreProducto;
-         txtPrecioProducto = bindingProducto.txtPrecioProductoCard;
+        txtPrecioProducto = bindingProducto.txtPrecioProductoCard;
 
-        t = bindingProducto.textProducto;
+        edtUsuario = bindingProducto.edtUsuarioSistema;
+        edtContra = bindingProducto.edtContraSistema;
+
+        btnAccederSistema = bindingProducto.btnAccesoSistema;
         btnUpdateProducto = bindingProducto.btnUpdateProducto;
 
 
@@ -91,13 +101,40 @@ public class ProductoFragment extends Fragment {
         linearViewCardLogin = view.findViewById(R.id.layoutCardLogin);
 
 
-
         obtenerProductos = new ProductoWebService( getActivity(), view);
 
         obtenerProductos.getProducto();
 
 
         mViewModel = new ViewModelProvider(this).get(ProductoViewModel.class);
+
+     //   mViewModel.getContraUsuario().observe(getViewLifecycleOwner(), contraUsuario -> { edtContra.setText( contraUsuario); });
+
+        // Create the observer which updates the UI.
+        final Observer<String> nameObserver = newName -> {
+            // Update the UI, in this case, a TextView.
+            edtContra.setText(newName);
+        };
+
+        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+        mViewModel.getNombreUsuario().observe(getActivity(), nameObserver);
+
+        btnAccederSistema.setOnClickListener(v ->
+        {
+
+            if( edtUsuario.getText().toString().trim().equals("") || edtContra.getText().toString().trim().equals("") )
+            {
+              //  Toast.makeText(getActivity(),"No deje campos vacíos ", Toast.LENGTH_LONG).show();
+                Snackbar.make(view, "No deje campos vacíos", Snackbar.LENGTH_LONG)
+
+                        .show();
+
+
+            }else
+                {
+                    Toast.makeText(getActivity()," no estan vacios ", Toast.LENGTH_LONG).show();
+                }
+        });
         // lamda
 
 
@@ -109,8 +146,6 @@ public class ProductoFragment extends Fragment {
 //            usuario.setNombreUsuario("Abel");
 //            usuario.setContraUsuario("123");
 
-
-
             btnUpdateProducto.setOnClickListener( v->{ obtenerProductos.getProducto(); });
 
 
@@ -118,10 +153,7 @@ public class ProductoFragment extends Fragment {
      {
          linearLayoutAgregarPedido.setVisibility(View.GONE);
 
-         mViewModel.getTextProd().observe(getViewLifecycleOwner(), s -> {
-             t.setText(s);
 
-         });
 
      }else
      {
