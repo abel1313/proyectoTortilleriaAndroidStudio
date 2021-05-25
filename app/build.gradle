@@ -51,4 +51,9 @@ dependencies {
     implementation 'com.android.volley:volley:1.1.1'
 
     implementation 'com.google.code.gson:gson:2.8.6'
+
+    implementation "androidx.security:security-crypto:1.0.0"
+
+    // For Identity Credential APIs
+    implementation "androidx.security:security-identity-credential:1.0.0-alpha02"
 }

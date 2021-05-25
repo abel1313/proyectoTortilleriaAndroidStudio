@@ -155,154 +155,17 @@
 
     </androidx.cardview.widget.CardView>
 
-    <LinearLayout
-        android:id="@+id/linearLayoutAgregarPedido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.072">
 
-        <LinearLayout
-            android:id="@+id/idLayoutVenta"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/edtPedido"
-                style="@style/styleEditText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:hint="@string/editTextPedido"
-                android:inputType="numberDecimal"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp" />
-
-
-            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/rbtKg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:text="@string/kg" />
-
-                <RadioButton
-                    android:id="@+id/rbtPesos"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pesos" />
-            </RadioGroup>
-
-            <Button
-                android:id="@+id/btnAddPedido"
-                style="@style/styleButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="@string/buttonAddPedido" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutCardLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.743"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038"
-        >
-
-
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="291dp"
-        android:layout_height="291dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.948"
-        android:backgroundTint="#84B0C1">
-
-        <!--      84B0C1   97D7F0  -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                style="@style/styleTextLoginUsuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/textUsuarioLogin" />
-
-            <EditText
-                android:id="@+id/edtUsuarioSistema"
-                style="@style/styleEditLoginUsuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ingrese usuario"
-                android:inputType="textAutoComplete" />
-
-            <TextView
-                style="@style/styleTextLoginUsuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/textContraLogin" />
-
-            <EditText
-                android:id="@+id/edtContraSistema"
-                style="@style/styleEditLoginUsuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ingrese contraseña"
-                android:inputType="textAutoComplete" />
-
-            <Button
-                android:id="@+id/btnAccesoSistema"
-
-                style="@style/styleButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/btnAccesoText" />
-
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/textView"
-        style="@style/styleTexto"
+    <FrameLayout
+        android:id="@+id/fragmentLoginOrOther"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/textLogin"
+        android:layout_height="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58" />
+        app:layout_constraintTop_toTopOf="@+id/text_producto"
+        app:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

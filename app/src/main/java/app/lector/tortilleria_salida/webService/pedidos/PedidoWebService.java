@@ -40,11 +40,11 @@ public class PedidoWebService
     public void getProducto()
     {
         txtExistenciasCalor = this.view.findViewById(R.id.existenciasValor);
-        edtPedido = (view.findViewById(R.id.edtPedido));
+     //   edtPedido = (view.findViewById(R.id.edtPedido));
         txtNombreProductoCard = (view.findViewById(R.id.txtNombreProducto));
         txtPrecioProductoCard = (view.findViewById(R.id.txtPrecioProductoCard));
 
-        linearLayoutEjemplo = view.findViewById(R.id.idLayoutVenta);
+    //    linearLayoutEjemplo = view.findViewById(R.id.idLayoutVenta);
 
 
         final String urlService =  new ConfigRequeen().toString();
@@ -74,9 +74,9 @@ public class PedidoWebService
 
     public void errorData( VolleyError error)
     {
-        edtPedido = (view.findViewById(R.id.edtPedido));
+     //   edtPedido = (view.findViewById(R.id.edtPedido));
 
-        edtPedido.setText(error.getMessage() + "");
+     //   edtPedido.setText(error.getMessage() + "");
     }
     public void datosPedido( JSONObject jSONObject ) throws JSONException {
         if( jSONObject != null )

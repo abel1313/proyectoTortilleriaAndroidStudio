@@ -9,4 +9,7 @@ public interface IPasarDatos
     void irGoogle( String urlGoogle );
 
      void hacerLlamada(String numeroCell);
+
+      void checandoSesion();
+
 }

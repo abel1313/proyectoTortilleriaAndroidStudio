@@ -14,4 +14,7 @@
     <string name="chooser_title">vamos a ver qe pas</string>
 
     <string name="buttonAddPedido">agregar</string>
+    <string name="exampleShared">Ejemplo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

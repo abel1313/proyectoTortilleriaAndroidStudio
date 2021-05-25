@@ -1,12 +1,14 @@
 package app.lector.tortilleria_salida.ui.home;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -29,6 +31,8 @@ public class HomeFragment extends Fragment {
     private ImageButton btnFacebook, btnTwitter, btnLlamar, btnCorreo;
 
     private IPasarDatos ipasarDatos;
+
+
 
 
     @Override
@@ -73,6 +77,18 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        SharedPreferences prefes;
+        prefes = getActivity().getSharedPreferences("trece", Context.MODE_PRIVATE);
+
+        Toast.makeText(getActivity(),""+ prefes.getString("a","HOM"), Toast.LENGTH_LONG).show();
+
+        if( prefes.getString("a","HOM").equals("abel"))
+        {
+            SharedPreferences prefes2;
+            prefes2 = getActivity().getSharedPreferences("treceSesion", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor2 = prefes2.edit();
+            editor2.putString("sessionActiva", "adminListo").commit();
+        }
 
 //        final TextView textView = binding.textHome;
 //      //  final TextView textViewEjemplo = binding.textEjemplo;

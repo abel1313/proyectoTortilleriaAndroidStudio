@@ -38,11 +38,11 @@ public class ProductoWebService
     public void getProducto()
     {
         txtExistenciasCalor = this.view.findViewById(R.id.existenciasValor);
-        edtPedido = (view.findViewById(R.id.edtPedido));
+       // edtPedido = (view.findViewById(R.id.edtPedido));
         txtNombreProductoCard = (view.findViewById(R.id.txtNombreProducto));
         txtPrecioProductoCard = (view.findViewById(R.id.txtPrecioProductoCard));
 
-        linearLayoutEjemplo = view.findViewById(R.id.idLayoutVenta);
+    //    linearLayoutEjemplo = view.findViewById(R.id.idLayoutVenta);
 
 
         final String urlService =  new ConfigRequeen().toString();
@@ -74,9 +74,9 @@ public class ProductoWebService
 
     private void errorData( VolleyError error)
     {
-        edtPedido = (view.findViewById(R.id.edtPedido));
+    //    edtPedido = (view.findViewById(R.id.edtPedido));
 
-        edtPedido.setText(error.getMessage() + "");
+    //    edtPedido.setText(error.getMessage() + "");
     }
 
     private void datosProducto( JSONObject jSONObject ) throws JSONException {
@@ -103,7 +103,7 @@ public class ProductoWebService
         // para ocultar un Layout
         //  linearLayoutEjemplo.setVisibility(LinearLayout.GONE);
         // es para mostrar un Layout
-        linearLayoutEjemplo.setVisibility(LinearLayout.VISIBLE);
+     //   linearLayoutEjemplo.setVisibility(LinearLayout.VISIBLE);
 
     }
 

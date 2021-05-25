@@ -1,6 +1,8 @@
 package app.lector.tortilleria_salida;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Toast;
@@ -23,10 +25,16 @@ public class MainActivity extends AppCompatActivity implements IPasarDatos {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private Permiso permiso;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -94,4 +102,38 @@ public class MainActivity extends AppCompatActivity implements IPasarDatos {
         permiso.permisoAppLlamar(numeroCel);
 
     }
+
+    @Override
+    public void checandoSesion() {
+
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+      //  Toast.makeText(this, " stop ", Toast.LENGTH_LONG).show();
+
+        SharedPreferences settings, settings2;
+        settings = getSharedPreferences("trece", Context.MODE_PRIVATE);
+        settings.edit().clear().commit();
+
+        settings2 = getSharedPreferences("treceSession", Context.MODE_PRIVATE);
+        settings2.edit().clear().commit();
+
+        Toast.makeText(this, " delete ", Toast.LENGTH_LONG).show();
+
+
+    }
+
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        finish();
+//        SharedPreferences settings = getSharedPreferences("trece", Context.MODE_PRIVATE);
+//        settings.edit().clear().commit();
+//        Toast.makeText(this, " delete ", Toast.LENGTH_LONG).show();
+//
+//    }
+
 }
