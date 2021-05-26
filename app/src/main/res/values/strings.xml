@@ -22,4 +22,5 @@
     <string name="textDescripcionUpdate"> En esta pantalle te permite actualizar la disponibilidad de las tortillas
         que ya se tiene y las que van saliendo</string>
     <string name="btnUpdateProducto">Actualizar producto</string>
+    <string name="stringSalir">Salir</string>
 </resources>

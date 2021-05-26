@@ -31,7 +31,10 @@ import app.lector.tortilleria_salida.localHorario.HorarioLocal;
 
 import app.lector.tortilleria_salida.model.Usuario;
 
+import app.lector.tortilleria_salida.ui.fueraHorario.FueraHorarioFragment;
 import app.lector.tortilleria_salida.ui.login.LoginFragment;
+import app.lector.tortilleria_salida.ui.login.OtroFragment;
+import app.lector.tortilleria_salida.ui.producto.update.UpdateProductoFragment;
 import app.lector.tortilleria_salida.webService.Producto.ProductoWebService;
 
 
@@ -61,7 +64,7 @@ public class ProductoFragment extends Fragment {
     private IPasarDatos iPasarDatos;
 
     private ProductoWebService obtenerProductos;
-    private SharedPreferences preferences;
+    private SharedPreferences preferencesProducto;
 
     public ProductoFragment()
     {
@@ -106,110 +109,49 @@ public class ProductoFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        linearLayoutAgregarPedido = view.findViewById(R.id.linearLayoutAgregarPedido);
-//        linearViewCardLogin = view.findViewById(R.id.layoutCardLogin);
-//
+        obtenerProductos = new ProductoWebService( getActivity(), view);
 
-//        obtenerProductos = new ProductoWebService( getActivity(), view);
-////
 //        obtenerProductos.getProducto();
 
-        LoginFragment loginFragment = new LoginFragment();
+        preferencesProducto = getActivity().getSharedPreferences("usuarioSesion", Context.MODE_PRIVATE);
 
         FragmentManager fragmentManager = getChildFragmentManager();
-
-        fragmentManager.beginTransaction()
-                .add(R.id.fragmentLoginOrOther, loginFragment)
-                .setReorderingAllowed(true)
-                .commit();
-
-
-
-//        usuarioViewModel = new ViewModelProvider(this).get(UsuarioViewModel.class);
-//        usuarioViewModel.getUsuarioModel().observe(getActivity(), cambioNombre->
-//        {
-//            edtContra.setText(cambioNombre + " de mas 13");
-//            usuarioViewModel.getUsuarioModel().setValue(cambioNombre +"  cambio");
-//            usuarioViewModel.getContraModel().setValue(" dale 13");
-//        });
-
-     //   mViewModel.getContraUsuario().observe(getViewLifecycleOwner(), contraUsuario -> { edtContra.setText( contraUsuario); });
-
-        // Create the observer which updates the UI.
-//        final Observer<String> nameObserver = newName -> {
-//            // Update the UI, in this case, a TextView.
-//
-//        };
-
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-
-
-//        btnAccederSistema.setOnClickListener(v ->
-//        {
-//
-//            edtContra.setText( usuarioViewModel.getUsuarioModel().getValue() + " dale ");
-//
-//            if( edtUsuario.getText().toString().trim().equals("") || edtContra.getText().toString().trim().equals("") )
-//            {
-//              //  Toast.makeText(getActivity(),"No deje campos vacíos ", Toast.LENGTH_LONG).show();
-//                Snackbar.make(view, "No deje campos vacíos", Snackbar.LENGTH_LONG)
-//                        .show();
-//                new UsuarioWebService(getActivity()).accederSistema( this , this, view);
-//
-//            }else
-//                {
-//                    new UsuarioWebService(getActivity()).accederSistema( this , this, view);
-//            String result = new UsuarioWebService(getActivity()).calando();
-//
-//
-//                    if( preferences == null )
-//                    {
-//                        preferences = getActivity().getSharedPreferences("usuarioSession", Context.MODE_PRIVATE);
-//
-//                        Log.d("cacio ", "entro vacion");
-//                    }
-//            if( preferences != null )
-//            {
-//                Log.d("vamoss ","=================================================================== " );
-//                Log.d("vamoss ", preferences.getString("example", "nad apara mostrar" ) + " " );
-//                Log.d("vamoss ","=================================================================== " );
-//            }
-//
-//
-//
-//                }
-//
-//        });
-        // lamda
-
-
-        if( HorarioLocal.horarioLocal(8,00,00, 20,00,00) )
+        if( HorarioLocal.horarioLocal(8,00,00, 16,00,00) )
         {
-
-//            usuario = new Usuario();
-//            usuario.setId(1);
-//            usuario.setNombreUsuario("Abel");
-//            usuario.setContraUsuario("123");
-
-//            btnUpdateProducto.setOnClickListener( v->{ obtenerProductos.getProducto(); });
-
-
-//     if( usuario == null)
-//     {
-//         linearLayoutAgregarPedido.setVisibility(View.GONE);
-//
-//     }else
-//     {
-//         linearViewCardLogin.setVisibility(View.GONE);
-//     }
-
-
+            // solo se llama si esta dentro del horario establecido xD
+            obtenerProductos.getProducto();
+            if( !preferencesProducto
+                    .getString("nombreUsuario","default")
+                    .equals("admin"))
+            {
+                LoginFragment loginFragment = new LoginFragment();
+                fragmentManager.beginTransaction()
+                        .add(R.id.fragmentLoginOrOther, loginFragment)
+                        .setReorderingAllowed(true)
+                        .commit();
+            }
+            else if( preferencesProducto.getString("nombreUsuario","default").equals("admin"))
+            {
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragmentLoginOrOther, UpdateProductoFragment.class, null)
+                        .setReorderingAllowed(true)
+                        .commit();
+            }else
+            {
+                fragmentManager.beginTransaction()
+                        .add(R.id.fragmentLoginOrOther, OtroFragment.class,null)
+                        .setReorderingAllowed(true)
+                        .commit();
+            }
 
         }else
         {
-        //    Toast.makeText(getActivity()," es falsote", Toast.LENGTH_LONG).show();
-            SharedPreferences settings = getActivity().getSharedPreferences("trece", Context.MODE_PRIVATE);
-            settings.edit().clear().commit();
+
+            FueraHorarioFragment fueraHorarioFragment = new FueraHorarioFragment();
+            fragmentManager.beginTransaction()
+                    .add(R.id.fragmentLoginOrOther, fueraHorarioFragment)
+                    .setReorderingAllowed(true)
+                    .commit();
         }
 
     }

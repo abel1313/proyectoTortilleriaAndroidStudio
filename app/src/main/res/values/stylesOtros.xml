@@ -99,4 +99,12 @@
         <item name="android:textColor">@color/colorLetra</item>
     </style>
 
+    <style name="styleButtonUpdateProductoSalir">
+        <item name="android:text">@string/stringSalir</item>
+        <item name="fontFamily">@font/adamina</item>
+        <item name="android:textSize">8sp</item>
+        <item name="backgroundTint">@color/colorButton</item>
+        <item name="android:textColor">@color/colorLetra</item>
+    </style>
+
 </resources>

@@ -1,4 +1,5 @@
 package app.lector.tortilleria_salida.webService.usuarios;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
@@ -31,7 +33,9 @@ import app.lector.tortilleria_salida.ViewModel.UsuarioViewModel;
 import app.lector.tortilleria_salida.model.ConfigRequeen;
 import app.lector.tortilleria_salida.model.Usuario;
 import app.lector.tortilleria_salida.patronDiseno.MySingleton;
+import app.lector.tortilleria_salida.ui.login.LoginFragment;
 import app.lector.tortilleria_salida.ui.producto.ProductoViewModel;
+import app.lector.tortilleria_salida.ui.producto.update.UpdateProductoFragment;
 
 public class UsuarioWebService
 {
@@ -71,7 +75,7 @@ public class UsuarioWebService
 
     }
 
-    public void accederSistema( ViewModelStoreOwner store, LifecycleOwner lifecycle, View view) throws JSONException {
+    public void accederSistema(ViewModelStoreOwner store, LifecycleOwner lifecycle, View view, FragmentManager fragmentManagerA) throws JSONException {
         final String urlService =  new ConfigRequeen().toString();
         final String url = urlService+"/producto/usuarios/acceder";
         final String url1 = urlService+"/usuario/acceder/";
@@ -95,6 +99,11 @@ public class UsuarioWebService
                             editor.commit();
 
 
+
+                            fragmentManagerA.beginTransaction()
+                                    .replace(R.id.fragmentLoginOrOther, UpdateProductoFragment.class,null)
+                                    .setReorderingAllowed(true)
+                                    .commit();
                             edtUsuario.setText("");
                             edtContra.setText("");
 

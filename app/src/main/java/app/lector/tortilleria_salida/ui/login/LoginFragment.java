@@ -146,9 +146,13 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+
         sharedPreferencesLogin = getActivity().getSharedPreferences("usuarioSesion", Context.MODE_PRIVATE);
 
-        if( sharedPreferencesLogin.getString("nombreUsuario","default").equals("admin"))
+        if( sharedPreferencesLogin
+                .getString("nombreUsuario","default")
+                .equals("admin"))
         {
             Toast.makeText(getActivity(), sharedPreferencesLogin.getString("nombreUsuario","default")+ " antes" , Toast.LENGTH_LONG ).show();
 
@@ -166,7 +170,9 @@ public class LoginFragment extends Fragment {
                     !edtUsuario.getText().toString().trim().equals("") )
             {
                 try {
-                    new UsuarioWebService(getActivity()).accederSistema(this,this,view);
+                    FragmentManager fragmentRepace = getParentFragmentManager();
+                    new UsuarioWebService(getActivity())
+                            .accederSistema(this,this,view, fragmentRepace);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
