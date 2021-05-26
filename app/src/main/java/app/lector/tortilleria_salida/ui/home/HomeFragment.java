@@ -7,14 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +29,7 @@ public class HomeFragment extends Fragment {
     private ImageButton btnFacebook, btnTwitter, btnLlamar, btnCorreo;
 
     private IPasarDatos ipasarDatos;
+    private  SharedPreferences prefes;
 
 
 
@@ -45,6 +44,7 @@ public class HomeFragment extends Fragment {
 
         btnCorreo = view.findViewById(R.id.btnGoogle);
 
+        prefes = getActivity().getSharedPreferences("usuarioSesion", Context.MODE_PRIVATE);
 
         btnLlamar.setOnClickListener(v->
         {
@@ -68,6 +68,18 @@ public class HomeFragment extends Fragment {
             ipasarDatos.irGoogle( url );
         });
 
+        if( prefes.getString("nombreUsuario","default").equals("admin"))
+        {
+            Toast.makeText(getActivity(), prefes.getString("nombreUsuario","default")+ " antes" , Toast.LENGTH_LONG ).show();
+        }
+
+    }
+
+    @Override
+    public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -77,18 +89,18 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        SharedPreferences prefes;
-        prefes = getActivity().getSharedPreferences("trece", Context.MODE_PRIVATE);
 
-        Toast.makeText(getActivity(),""+ prefes.getString("a","HOM"), Toast.LENGTH_LONG).show();
-
-        if( prefes.getString("a","HOM").equals("abel"))
-        {
-            SharedPreferences prefes2;
-            prefes2 = getActivity().getSharedPreferences("treceSesion", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor2 = prefes2.edit();
-            editor2.putString("sessionActiva", "adminListo").commit();
-        }
+//        prefes = getActivity().getSharedPreferences("trece", Context.MODE_PRIVATE);
+//
+//        Toast.makeText(getActivity(),""+ prefes.getString("a","HOM"), Toast.LENGTH_LONG).show();
+//
+//        if( prefes.getString("a","HOM").equals("abel"))
+//        {
+//            SharedPreferences prefes2;
+//            prefes2 = getActivity().getSharedPreferences("treceSesion", Context.MODE_PRIVATE);
+//            SharedPreferences.Editor editor2 = prefes2.edit();
+//            editor2.putString("sessionActiva", "adminListo").commit();
+//        }
 
 //        final TextView textView = binding.textHome;
 //      //  final TextView textViewEjemplo = binding.textEjemplo;

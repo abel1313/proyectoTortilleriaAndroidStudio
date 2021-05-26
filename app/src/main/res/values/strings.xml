@@ -17,4 +17,9 @@
     <string name="exampleShared">Ejemplo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="textUpdate"> Ingrese actualización</string>
+    <string name="textDescripcionUpdate"> En esta pantalle te permite actualizar la disponibilidad de las tortillas
+        que ya se tiene y las que van saliendo</string>
+    <string name="btnUpdateProducto">Actualizar producto</string>
 </resources>

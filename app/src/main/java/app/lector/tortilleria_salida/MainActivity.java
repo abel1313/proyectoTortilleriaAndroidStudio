@@ -1,8 +1,6 @@
 package app.lector.tortilleria_salida;
 
-
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.ClipData;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Toast;
@@ -54,6 +52,8 @@ public class MainActivity extends AppCompatActivity implements IPasarDatos {
         NavigationUI.setupWithNavController(navigationView, navController);
 
         permiso = new Permiso(  this );
+
+
     }
 
     @Override
@@ -109,22 +109,22 @@ public class MainActivity extends AppCompatActivity implements IPasarDatos {
     }
 
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-      //  Toast.makeText(this, " stop ", Toast.LENGTH_LONG).show();
-
-        SharedPreferences settings, settings2;
-        settings = getSharedPreferences("trece", Context.MODE_PRIVATE);
-        settings.edit().clear().commit();
-
-        settings2 = getSharedPreferences("treceSession", Context.MODE_PRIVATE);
-        settings2.edit().clear().commit();
-
-        Toast.makeText(this, " delete ", Toast.LENGTH_LONG).show();
-
-
-    }
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//      //  Toast.makeText(this, " stop ", Toast.LENGTH_LONG).show();
+//
+//        SharedPreferences settings, settings2;
+//        settings = getSharedPreferences("trece", Context.MODE_PRIVATE);
+//        settings.edit().clear().commit();
+//
+//        settings2 = getSharedPreferences("treceSession", Context.MODE_PRIVATE);
+//        settings2.edit().clear().commit();
+//
+//        Toast.makeText(this, " delete ", Toast.LENGTH_LONG).show();
+//
+//
+//    }
 
 //    @Override
 //    public void onDestroy() {

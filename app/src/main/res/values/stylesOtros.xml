@@ -62,4 +62,41 @@
 
 </style>
 
+
+    <style name="styleTextInformacionPantalla">
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">left</item>
+        <item name="fontFamily">@font/brawler</item>
+        <item name="android:textColor">@color/colorLetra</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+
+    <style name="styleTextInformacion">
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="fontFamily">@font/trocchi</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">70dp</item>
+        <item name="android:textColor">@color/colorLetra</item>
+    </style>
+
+    <style name="styleEditInformacion">
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="fontFamily">@font/trocchi</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">110dp</item>
+        <item name="android:textColor">@color/colorLetra</item>
+    </style>
+
+    <style name="styleButtonUpdateProducto">
+        <item name="android:text">@string/btnUpdateProducto</item>
+        <item name="fontFamily">@font/adamina</item>
+        <item name="android:textSize">12sp</item>
+        <item name="backgroundTint">@color/colorButton</item>
+        <item name="android:textColor">@color/colorLetra</item>
+    </style>
+
 </resources>

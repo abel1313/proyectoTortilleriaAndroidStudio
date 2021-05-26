@@ -19,12 +19,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
 
 import app.lector.tortilleria_salida.R;
 import app.lector.tortilleria_salida.databinding.FragmentLoginBinding;
 import app.lector.tortilleria_salida.databinding.FragmentProductoBinding;
 import app.lector.tortilleria_salida.model.Usuario;
+import app.lector.tortilleria_salida.ui.producto.update.UpdateProductoFragment;
+import app.lector.tortilleria_salida.webService.usuarios.UsuarioWebService;
 
 
 public class LoginFragment extends Fragment {
@@ -37,6 +42,7 @@ public class LoginFragment extends Fragment {
 
     private Usuario u;
 
+    private  SharedPreferences sharedPreferencesLogin;
 
 
 
@@ -140,30 +146,37 @@ public class LoginFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        sharedPreferencesLogin = getActivity().getSharedPreferences("usuarioSesion", Context.MODE_PRIVATE);
 
-        btnAccederSistema.setOnClickListener(v->
+        if( sharedPreferencesLogin.getString("nombreUsuario","default").equals("admin"))
         {
-            SharedPreferences prefs;
-         //  Toast.makeText(getActivity()," Buena ", Toast.LENGTH_LONG).show();
-            FragmentManager fragmentManager = getParentFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragmentLoginOrOther, OtroFragment.class,null)
+            Toast.makeText(getActivity(), sharedPreferencesLogin.getString("nombreUsuario","default")+ " antes" , Toast.LENGTH_LONG ).show();
+
+            FragmentManager fragmentManagerUpdate = getParentFragmentManager();
+            fragmentManagerUpdate.beginTransaction()
+                    .replace(R.id.fragmentLoginOrOther, UpdateProductoFragment.class,null)
                     .setReorderingAllowed(true)
                     .commit();
 
-            Usuario a = new Usuario();
-            a.setNombreUsuario(" Abel ");
+        }
 
-            model.getUsuarioNombre().setValue(edtUsuario.getText()+"");
-            prefs = getActivity().getSharedPreferences("trece", Context.MODE_PRIVATE);
+        btnAccederSistema.setOnClickListener(v->
+        {
+            if( !edtContra.getText().toString().trim().equals("") &&
+                    !edtUsuario.getText().toString().trim().equals("") )
+            {
+                try {
+                    new UsuarioWebService(getActivity()).accederSistema(this,this,view);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }else
+            {
+                Snackbar.make(view, "No deje campos vacíos", Snackbar.LENGTH_LONG).show();
+                edtContra.setText("");
+                edtUsuario.setText("");
 
-         SharedPreferences.Editor edit = prefs.edit();
-        edit.putString("a","abel");
-        edit.commit();
-
-
-
-
+            }
         });
 
     }

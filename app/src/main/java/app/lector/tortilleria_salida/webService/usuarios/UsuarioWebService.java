@@ -15,9 +15,15 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 import app.lector.tortilleria_salida.R;
@@ -31,10 +37,11 @@ public class UsuarioWebService
 {
 
     private ProductoViewModel mViewModel;
-    private SharedPreferences preferences;
+    private final SharedPreferences preferences;
 
     private Context context;
-    private EditText edt;
+    private EditText edtUsuario, edtContra;
+
     public UsuarioWebService( final Context context)
     {
     this.context = context;
@@ -64,58 +71,44 @@ public class UsuarioWebService
 
     }
 
-    public void accederSistema( ViewModelStoreOwner store, LifecycleOwner lifecycle, View view)
-    {
+    public void accederSistema( ViewModelStoreOwner store, LifecycleOwner lifecycle, View view) throws JSONException {
         final String urlService =  new ConfigRequeen().toString();
         final String url = urlService+"/producto/usuarios/acceder";
-        final String url1 = urlService+"/producto/getProducto/"+1;
-        edt = view.findViewById(R.id.edtContraSistema);
+        final String url1 = urlService+"/usuario/acceder/";
+        edtContra = view.findViewById(R.id.edtContraSistema);
+        edtUsuario = view.findViewById(R.id.edtUsuarioSistema);
 
+      //  String json = g.toJson(usu);
+        JSONObject json = new JSONObject();
+        json.put("nombreUsuario", edtUsuario.getText().toString().trim() );
+        json.put("contrasenaUsuario", edtContra.getText().toString().trim());
 
-     //   final LinearLayout linearLayoutAgregarPedido = view.findViewById(R.id.linearLayoutAgregarPedido);
-      //  final LinearLayout linearViewCardLogin  = view.findViewById(R.id.layoutCardLogin);
-
-        Usuario usu = new Usuario();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, url1, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        //textView.setText("Response: " + response.toString());
-//                        usu.setNombreUsuario(("Abel"));
-//                        usu.setContraUsuario(("123"));
-//
-//                        UsuarioViewModel model = new ViewModelProvider( store ).get(UsuarioViewModel.class);
-//                        model.getUsuarioModel().observe(lifecycle, users -> {
-//                            // update UI
-//
-//                            edt.setText(users + " dale ");
-//                        });
+                (Request.Method.POST, url1, json, response -> {
+                    if( response != null )
+                    {
+                        try {
+                            Log.d("vamoss ",response.getString("nombreUsuario") + " response"  );
 
-                        if( response != null )
-                        {
-                            Log.d("vamoss ","desabilitar layout " );
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putString("nombreUsuario",  response.getString("nombreUsuario") );
+                            editor.commit();
 
-                        //    linearViewCardLogin.setVisibility(View.INVISIBLE);
-                          //  linearLayoutAgregarPedido.setVisibility(View.INVISIBLE);
+
+                            edtUsuario.setText("");
+                            edtContra.setText("");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-
-                        Log.d("vamoss ","=================================================================== " );
-
-                        Log.d("vamoss ","response: "+ response.toString() );
-
-                        Log.d("vamoss ","=================================================================== " );
-
-
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString("example",  response.toString() );
-                        editor.commit();
-
-
                     }
+
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // TODO: Handle error
+                        Snackbar.make(view, "Los datos ingresados son incorrectos", Snackbar.LENGTH_LONG).show();
+                        edtContra.setText("");
+                        edtUsuario.setText("");
                     }
                 });
         // Access the RequestQueue through your singleton class.
@@ -131,6 +124,45 @@ public class UsuarioWebService
 
         return "exactament";
     }
+
+
+    public void newMetod()
+    {
+
+        StringRequest stringRequest = new StringRequest
+                (Request.Method.POST, null,new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                })
+        {        protected Map<String,String> getparams()
+        {
+            Map<String,String> params = new HashMap<>();
+
+            //  String json = g.toJson(usu);
+            JSONObject json = new JSONObject();
+            params.put("nombreUsuario", "admin");
+            params.put("contrasenaUsuario", "admin123");
+            Log.d(" errorrr ", "==============================================");
+            Log.d(" errorrr ", json.toString());
+            Log.d(" errorrr ", "==============================================");
+            return params;
+        }
+        };
+
+
+    }
+
+
+
+
+
 
 
 
